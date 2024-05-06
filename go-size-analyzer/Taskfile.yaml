@@ -1,0 +1,21 @@
+version: 3
+
+vars:
+  VERSION: 0.4.0
+
+tasks:
+  install: 
+    cmds:
+    - defer: rm gsa.tar.gz 
+    - wget https://github.com/Zxilly/go-size-analyzer/releases/download/v{{ .VERSION }}/go-size-analyzer_darwin_arm64.tar.gz -O gsa.tar.gz
+    - tar -zxvf gsa.tar.gz 
+    - rm LICENSE README.md README_zh-CN.md
+    - sudo mv gsa /usr/local/bin/
+  
+  gsa:
+  - go build -o demo
+  - gsa demo
+
+  gsa:web:
+  - go build -o demo
+  - gsa --web demo
