@@ -1,0 +1,23 @@
+version: 3
+
+tasks:
+  install: go install github.com/google/gops@v0.3.19
+
+  run-and-measure:
+    - >
+      bash -c '
+      go run main.go &
+      gops $! 10s
+      '
+
+  stats: gops stats localhost:8080
+  stack: gops stack localhost:8080
+  memstats: gops memstats localhost:8080
+  pprof-cpu: gops pprof-cpu localhost:8080
+  pprof-heap: gops pprof-heap localhost:8080
+  trace: gops trace localhost:8080
+
+  # viddy -n 1 "gops $!"
+  gops:
+    - gops
+    - gops tree
