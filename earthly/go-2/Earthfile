@@ -1,0 +1,9 @@
+VERSION 0.8
+FROM golang:1.21-alpine3.18
+WORKDIR /go-example
+
+build:
+    COPY main.go .
+    RUN go build -o app main.go
+    ENTRYPOINT ["/go-example/app"]
+    SAVE IMAGE earthly/example-go:2

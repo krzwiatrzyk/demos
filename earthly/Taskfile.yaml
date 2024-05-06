@@ -1,0 +1,12 @@
+version: 3
+
+tasks:
+  install:
+  - brew install earthly
+  - earthly bootstrap
+
+  build:remote:
+  - earthly github.com/earthly/hello-world+hello
+
+  build:monorepo:
+  - earthly +all
