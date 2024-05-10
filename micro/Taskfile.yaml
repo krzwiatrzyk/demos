@@ -1,0 +1,39 @@
+version: 3
+
+tasks:
+  micro:install:
+    cmds:
+    # - go install github.com/micro/micro/v3@latest
+    - curl -fsSL https://raw.githubusercontent.com/micro/micro/master/scripts/install.sh | /bin/bash
+    status:
+    - command -v micro
+
+  micro:start:
+    cmds:
+    - micro server # or: docker run -p 8080:8080 -p 8081:8081 ghcr.io/micro/micro:latest server
+
+  micro:login:
+    desc: |
+      Username: admin
+      Password: micro
+    cmds:
+    - micro login
+
+  micro:helloworld:start: 
+    dir: helloworld
+    cmds:
+    - go mod tidy
+    - micro run .
+  #- micro run github.com/micro/services/helloworld
+  micro:helloworld:invoke: micro call helloworld 
+  micro:helloworld:status: micro status helloworld
+  micro:helloworld:logs: micro logs helloworld
+
+  micro:services: micro services
+  micro:status: micro status
+
+  micro:web: 
+    desc: |
+      Available at: http://localhost:8082
+    cmds:
+    - micro web
