@@ -1,0 +1,14 @@
+version: 3
+
+tasks:
+  init: 
+  - npm init
+  - npm init @eslint/config
+  - npm install --save-dev prettier
+
+  lint:
+  - npx eslint
+
+  format:
+  - npm run format:check
+  - npm run format
